@@ -1,5 +1,6 @@
 import logging
 
+from exceptions import LoadingCustomersFailedException
 from great_circle_distance import GreatCircleDistance
 from load_customers import LoadCustomers
 
@@ -17,6 +18,9 @@ class NearByCustomers(object):
 
     @classmethod
     def get_nearby_customers(cls, customer_records, max_distance):
+
+        if not customer_records:
+            return []
 
         nearby_customers = []
 
@@ -39,12 +43,17 @@ if __name__ == "__main__":
 
     max_distance_km = 100
 
-    customer_records = LoadCustomers.from_url("https://s3.amazonaws.com/intercom-take-home-test/customers.txt")
+    try:
+        customer_records = LoadCustomers.from_url("https://s3.amazonaws.com/intercom-take-home-test/customers.txt")
+    except LoadingCustomersFailedException as error:
+        logger.error("Failed to load customer records.\nError Message: {0}".format(str(error)))
+    else:
+        nearby_customers = NearByCustomers.get_nearby_customers(customer_records, max_distance_km)
 
-    nearby_customers = NearByCustomers.get_nearby_customers(customer_records, max_distance_km)
-
-    print(
-        "Found {0} customers within {1} KMs to invite over for coffee!".format(len(nearby_customers), max_distance_km)
-    )
-    for customer in nearby_customers:
-        print("Customer Name: {0}, User ID: {1}".format(customer["name"], customer["user_id"]))
+        print(
+            "Found {0} customers within {1} KMs to invite over for coffee!".format(
+                len(nearby_customers), max_distance_km
+            )
+        )
+        for customer in nearby_customers:
+            print("Customer Name: {0}, User ID: {1}".format(customer["name"], customer["user_id"]))
