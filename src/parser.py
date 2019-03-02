@@ -2,7 +2,7 @@ import json
 from abc import ABC
 from json import JSONDecodeError
 
-from exceptions import ParsingFailedException
+from src.exceptions import ParsingFailedException
 
 
 class AbstractParser(ABC):
@@ -16,6 +16,10 @@ class TextParser(AbstractParser):
 
     @classmethod
     def parse(cls, raw_data):
+
+        if not raw_data:
+            raw_data = ""
+
         raw_records = raw_data.strip().split("\n")
         parsed_records = []
         error_msg = None

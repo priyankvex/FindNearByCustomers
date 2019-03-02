@@ -5,8 +5,8 @@ import requests
 from jsonschema import validate, ValidationError
 from requests.exceptions import MissingSchema
 
-from exceptions import LoadingCustomersFailedException, ParsingFailedException
-from parser import JSONParser, TextParser, XMLParser
+from src.exceptions import LoadingCustomersFailedException, ParsingFailedException
+from src.parser import JSONParser, TextParser, XMLParser
 from utils import read_from_file
 
 logger = logging.getLogger(__name__)
@@ -64,9 +64,6 @@ class LoadCustomers(object):
 
         error_msg = None
         parsed_customers_data = None
-
-        if not customers_data:
-            return None
 
         _, file_extension = os.path.splitext(file_path)
         parser = cls.__get_parser_from_extension(file_extension)

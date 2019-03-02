@@ -1,8 +1,8 @@
 import logging
 
-from exceptions import LoadingCustomersFailedException
-from great_circle_distance import GreatCircleDistance
-from load_customers import LoadCustomers
+from src.exceptions import LoadingCustomersFailedException
+from src.great_circle_distance import GreatCircleDistance
+from src.load_customers import LoadCustomers
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
