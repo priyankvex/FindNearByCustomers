@@ -43,7 +43,8 @@ class GreatCircleDistance(object):
                 "longitude": {
                     "type": "number"
                 }
-            }
+            },
+            "required": ["latitude", "longitude"]
         }
 
         try:
