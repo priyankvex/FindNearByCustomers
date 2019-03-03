@@ -7,7 +7,7 @@ from requests.exceptions import MissingSchema
 
 from src.exceptions import LoadingCustomersFailedException, ParsingFailedException
 from src.parser import JSONParser, TextParser, XMLParser
-from utils import read_from_file
+from src.utils import read_from_file
 
 logger = logging.getLogger(__name__)
 
