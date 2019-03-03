@@ -11,6 +11,14 @@ class GreatCircleDistance(object):
 
     @classmethod
     def calculate(cls, point_1, point_2, radius=EARTH_RADIUS_KM):
+        """
+        For a given two points, return the great circle distance.
+
+        :param point_1: coordinates of point 1
+        :param point_2: coordinates of point 2
+        :param radius: radius of the sphere (default resorts to the radius of the earth)
+        :return: great circle distance between the given points.
+        """
 
         cls.__validate_input(point_1)
         cls.__validate_input(point_2)

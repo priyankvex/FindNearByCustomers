@@ -16,7 +16,13 @@ class LoadCustomers(object):
 
     @classmethod
     def from_file(cls, filename):
+        """
+        Returns parsed customer records from the given file name
+        Raises LoadingCustomersFailedException in case of a failure.
 
+        :param filename: file name that contains the customer records
+        :return: list of customer records
+        """
         error_msg = None
         parsed_customers = None
 
@@ -35,7 +41,13 @@ class LoadCustomers(object):
 
     @classmethod
     def from_url(cls, file_url):
+        """
+        Returns the parsed customer records from a given URL
+        Raises LoadingCustomersFailedException in case of a failure.
 
+        :param file_url:
+        :return:
+        """
         error_msg = None
         parsed_customers = None
 
@@ -111,7 +123,8 @@ class LoadCustomers(object):
                     "name": {
                         "type": "string"
                     }
-                }
+                },
+                "required": ["latitude", "longitude", "user_id", "name"]
             }
         }
 
