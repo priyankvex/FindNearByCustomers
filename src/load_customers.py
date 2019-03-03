@@ -19,7 +19,6 @@ class LoadCustomers(object):
 
         error_msg = None
         parsed_customers = None
-        _, file_extension = os.path.splitext(filename)
 
         try:
             customers_data = read_from_file(filename).strip()
